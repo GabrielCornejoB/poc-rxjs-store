@@ -1,59 +1,25 @@
-# PocRxjsStore
+# RxJs Store POC 🧪
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.5.
+Lately I've been using a lot the package `@ngrx/component-store` 📦. It's a really nice package because it allows to use the
+Redux pattern but is very lightweight and is meant to be used to manage local state instead of global state. But I was 
+curious about how it worked deep down 🤔, so I checked out the source code. I am not really a library developer, and maybe I 
+am in no position to judge. But after reading the code for a while, it was kinda messy. It had tons of
+different paths in each function, a lot of generics and overrides I really don't see necessary 🤷‍♂️. So I created
+this **Proof Of Concept** to make a way simpler, minimalist and understandable "local store" with only RxJs.
 
-## Development server
+I am not saying this is like a replacement or something, this is just a really really basic implementation. It is inspired
+in some stuff from the original library but also other stuff that made more sense to me, like for example:
 
-To start a local development server, run:
+- Using a `BehaviorSubject` instead of a `ReplaySubject`.
+- Making the **"base class"** `abstract` instead of a normal service (I know it may be convenient to inject the store directly
+in a component, but on the other side I believe that this should **always** be abstracted to a service).
+- Remove all that logic that allows to pass observables instead of the values for almost all the functions (I don't really see
+where this could be useful).
+- Remove the huge amount of flexibility that the `select` function has. In the original library this function has like a thousand overrides
+and some are nice, but also it gets really messy. It would be way simpler if we set one standard and the library users should
+stick to it.
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+To conclude, it was an interest exercise. Clearly here I am not following like "good practices" in the consumption of the store, 
+or with tests, or naming, or linting. But the main goal of this repo I think was accomplished, and it was to understand how this works
+under the ground. Also, it will be useful to the future me for when I enter a project in which I can't install any extra dependencies
+but still want to follow this pattern for local state management.
