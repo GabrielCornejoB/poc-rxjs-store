@@ -19,6 +19,12 @@ where this could be useful).
 and some are nice, but also it gets really messy. It would be way simpler if we set one standard and the library users should
 stick to it.
 
+##### File structure:
+
+- [Base Store (`rxjs-store.ts`)](./src/app/rxjs-store/rxjs-store.ts)
+- [Service that implements the store (`posts-store.service.ts`)](./src/app/rxjs-store/posts-store.ts)
+- [Base component that uses the service (`app.component.ts`)](./src/app/app.component.ts)
+
 To conclude, it was an interest exercise. Clearly here I am not following like "good practices" in the consumption of the store, 
 or with tests, or naming, or linting. But the main goal of this repo I think was accomplished, and it was to understand how this works
 under the ground. Also, it will be useful to the future me for when I enter a project in which I can't install any extra dependencies
